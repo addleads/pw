@@ -1,4 +1,3 @@
-streamlit
-playwright
-asyncio
+playwright 1.46.0
+asyncio 
 random
