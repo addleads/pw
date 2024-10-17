@@ -14,23 +14,17 @@ user_agents = [
 
 async def run_playwright():
     async with async_playwright() as p:
-        browser = await p.chromium.launch()
+        browser = await p.chromium.launch(headless=True)  # Executar em modo headless
         
-        # Seleciona aleatoriamente um user agent da lista
         selected_user_agent = random.choice(user_agents)
         
-        # Define o user agent personalizado
-        context = await browser.new_context(
-            user_agent=selected_user_agent
-        )
-        
+        context = await browser.new_context(user_agent=selected_user_agent)
         page = await context.new_page()
         await page.goto("http://google.com")
         title = await page.title()
         await browser.close()
         return title
 
-# Função principal para executar a corrotina
 async def main():
     title = await run_playwright()
     st.write(f"O título da página é: {title}")
