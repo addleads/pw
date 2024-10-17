@@ -30,10 +30,10 @@ async def run_playwright():
         await browser.close()
         return title
 
-if __name__ == '__main__':
-    # Configurando o ProactorEventLoop
-    loop = asyncio.ProactorEventLoop()
-    asyncio.set_event_loop(loop)
-    
-    title = loop.run_until_complete(run_playwright())
+# Função principal para executar a corrotina
+async def main():
+    title = await run_playwright()
     st.write(f"O título da página é: {title}")
+
+if __name__ == '__main__':
+    asyncio.run(main())
